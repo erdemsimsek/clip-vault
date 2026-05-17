@@ -1,0 +1,15 @@
+[package]
+name = "clip-vault-daemon"
+version.workspace = true
+authors.workspace = true
+description = "Background daemon — watches the clipboard, owns the encryption key."
+edition.workspace = true
+readme.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+
+[lints]
+workspace = true
