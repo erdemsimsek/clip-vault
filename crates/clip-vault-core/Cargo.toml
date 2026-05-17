@@ -1,0 +1,15 @@
+[package]
+name = "clip-vault-core"
+version.workspace = true
+authors.workspace = true
+description = "Core library: encrypted storage, AES-256-GCM, clipboard entry types."
+edition.workspace = true
+readme.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+
+[lints]
+workspace = true

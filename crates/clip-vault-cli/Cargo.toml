@@ -1,0 +1,15 @@
+[package]
+name = "clip-vault-cli"
+version.workspace = true
+authors.workspace = true
+description = "Command-line client for the ClipVault daemon."
+edition.workspace = true
+readme.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+
+[lints]
+workspace = true

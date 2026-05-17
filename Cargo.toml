@@ -1,6 +1,31 @@
-[package]
-name = "clip-vault"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+members = [
+    "crates/clip-vault-cli",
+    "crates/clip-vault-core",
+    "crates/clip-vault-daemon",
+    "crates/clip-vault-proto",
+    "crates/clip-vault-tui"
+]
+resolver = "3"
 
-[dependencies]
+[workspace.package]
+version = "0.0.1"
+authors = ["Erdem Simsek"]
+description = "An encrypted clipboard manager for Wayland that doesn't keep your secrets forever."
+edition = "2024"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/erdemsimsek/clip-vault"
+rust-version = "1.95.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unused_must_use = "deny"
+
+[workspace.lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "warn"
+todo = "warn"
