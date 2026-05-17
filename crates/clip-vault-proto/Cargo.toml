@@ -1,0 +1,15 @@
+[package]
+name = "clip-vault-proto"
+version.workspace = true
+authors.workspace = true
+description = "IPC types shared between the daemon and clients."
+edition.workspace = true
+readme.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+
+[lints]
+workspace = true
