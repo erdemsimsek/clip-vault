@@ -10,6 +10,9 @@ repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+thiserror.workspace = true
+rusqlite = "0.40.0"
 
 [lints]
 workspace = true
+

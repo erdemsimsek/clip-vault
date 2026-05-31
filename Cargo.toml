@@ -29,3 +29,6 @@ nursery = { level = "warn", priority = -1 }
 unwrap_used = "deny"
 expect_used = "warn"
 todo = "warn"
+
+[workspace.dependencies]
+thiserror = "2.0.18"
