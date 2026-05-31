@@ -134,3 +134,15 @@ jobs:
           cache-on-failure: true
       - name: Minimum supported Rust version
         run: cargo check --workspace
+
+  deny:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny
+      - name: Dependency policy check
+        run: cargo deny check
