@@ -5,7 +5,7 @@ An encrypted clipboard manager for Wayland that doesn't keep your secrets foreve
 > [!WARNING]
 > **Pre-alpha** — under active development, nothing usable yet.
 
-<!-- badges go here once CI lands -->
+[![CI](https://github.com/erdemsimsek/clip-vault/actions/workflows/ci.yml/badge.svg)](https://github.com/erdemsimsek/clip-vault/actions/workflows/ci.yml)
 
 ## Why ClipVault?
 
