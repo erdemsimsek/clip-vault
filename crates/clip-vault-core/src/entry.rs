@@ -88,6 +88,18 @@ impl EntryId {
     pub fn new() -> Self {
         Self(Uuid::now_v7())
     }
+
+    /// Returns the 16-byte representation, for storage/serialization.
+    #[must_use]
+    pub const fn as_bytes(&self) -> &[u8; 16] {
+        self.0.as_bytes()
+    }
+
+    /// Reconstructs an `EntryId` from its 16-byte representation.
+    #[must_use]
+    pub const fn from_bytes(bytes: [u8; 16]) -> Self {
+        Self(Uuid::from_bytes(bytes))
+    }
 }
 
 impl Default for EntryId {
