@@ -23,6 +23,8 @@ serde_with = "3.21.0"
 rand_core = { version = "0.6.4", features = ["getrandom"] }
 zeroize = "1.9.0"
 aes-gcm = { version = "0.10.0", features = ["zeroize"]}
+rusqlite_migration = "2.6.0"
+directories = "6.0.0"
 
 [dev-dependencies]
 proptest = "1.11.0"

@@ -1,4 +1,5 @@
 use rusqlite::Error as SqliteError;
+use rusqlite_migration::Error as SqliteMigrationError;
 use thiserror::Error;
 
 /// Convenience result alias for clip-vault-core.
@@ -30,6 +31,10 @@ pub enum Error {
     /// `SQLite` or other storage backend failure.
     #[error("storage error: {0}")]
     Storage(#[from] SqliteError),
+
+    /// Schema migration failure.
+    #[error("migration error")]
+    Migration(#[from] SqliteMigrationError),
 
     /// System keyring (libsecret / kwallet) failure.
     #[error("keyring error")]
