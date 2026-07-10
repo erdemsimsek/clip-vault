@@ -32,7 +32,11 @@ allow = [
 ]
 unused-allowed-license = "allow"
 confidence-threshold = 0.9
-exceptions = []
+# option-ext (via directories → dirs-sys) is MPL-2.0 (file-level copyleft).
+# Safe to use as an unmodified dependency; whitelist just this crate.
+exceptions = [
+    { allow = ["MPL-2.0"], name = "option-ext" },
+]
 
 [bans]
 multiple-versions = "warn"
