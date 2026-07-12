@@ -51,16 +51,16 @@ pub struct EntryMeta {
     /// Creation timestamp
     pub created_at: i64, // epoch millis
 
-    /// Expiration timestamp
+    /// Optional expiry date for entry.
     pub expires_at: Option<i64>,
 
-    /// Pinned status
+    /// Pin status.
     pub pinned: bool,
 
-    /// Number of times the entry pasted
+    /// Number of times the entry is pasted.
     pub times_pasted: u32,
 
-    /// Content type
+    /// Entry content type.
     pub content_kind: ContentKind,
 }
 
@@ -134,6 +134,16 @@ impl Storage {
         Ok(Self { handle: connection })
     }
 
+    /// In-memory store for tests — real schema and migrations, no files.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`Error::Storage`] if any rusqlite operation fails.
+    #[cfg(test)]
+    pub(crate) fn in_memory() -> crate::Result<Self> {
+        Self::new(Connection::open_in_memory()?)
+    }
+
     /// Open the database connection.
     ///
     /// # Errors
@@ -153,12 +163,12 @@ impl Storage {
     /// # Errors
     ///
     /// Returns [`Error::Storage`] if any rusqlite operation fails.
-    pub fn save_vault(&self, blob: &[u8], created_at: i64) -> crate::Result<()> {
+    pub fn save_vault(&self, blob: &[u8]) -> crate::Result<()> {
         self.handle.execute(
             "
                 INSERT or REPLACE INTO vault (id, data, created_at) VALUES (1, ?1, ?2)
             ",
-            (&blob, &created_at),
+            (&blob, chrono::Utc::now().timestamp_millis()),
         )?;
 
         Ok(())
@@ -322,8 +332,7 @@ mod tests {
         let storage = Storage::new(conn).unwrap();
 
         let blob_test_data: [u8; 10] = [5; 10];
-        let created_at: i64 = 100;
-        storage.save_vault(&blob_test_data, created_at).unwrap();
+        storage.save_vault(&blob_test_data).unwrap();
 
         let blob_readback = storage.load_vault().unwrap().unwrap();
 
