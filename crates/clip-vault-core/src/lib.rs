@@ -4,6 +4,7 @@ mod crypto;
 mod entry;
 mod error;
 mod storage;
+mod vault;
 
 pub use entry::{
     BinaryPayload, ClipEntry, EntryContent, EntryId, MimeType, PasteCount, SensitiveReason,
@@ -18,3 +19,5 @@ pub use crypto::{
 };
 
 pub use storage::{ContentKind, EntryMeta, Storage, StoredEntry};
+
+pub use vault::{Vault, VaultMeta};
