@@ -70,6 +70,12 @@ pub struct ClipEntry {
     expires_at: Option<DateTime<Utc>>,
 }
 
+impl From<PasteCount> for u32 {
+    fn from(count: PasteCount) -> Self {
+        count.0
+    }
+}
+
 impl From<&str> for MimeType {
     fn from(s: &str) -> Self {
         Self(s.to_string())
@@ -123,6 +129,54 @@ impl ClipEntry {
             expires_at: None,
         }
     }
+
+    /// Returns the entry id
+    #[must_use]
+    pub const fn get_entry_id(&self) -> &EntryId {
+        &self.id
+    }
+
+    /// Returns the entry content
+    #[must_use]
+    pub const fn get_entry_content(&self) -> &EntryContent {
+        &self.content
+    }
+
+    /// Returns the entry sentitivty
+    #[must_use]
+    pub const fn get_entry_sensitivity(&self) -> &Sensitivity {
+        &self.sensitivity
+    }
+
+    /// Returns the entry mime types
+    #[must_use]
+    pub const fn get_entry_mime_types(&self) -> &Vec<MimeType> {
+        &self.mime_types
+    }
+
+    /// Returns the entry paste count
+    #[must_use]
+    pub const fn get_entry_times_pasted(&self) -> &PasteCount {
+        &self.times_pasted
+    }
+
+    /// Returns the entry pinned or not
+    #[must_use]
+    pub const fn get_entry_pinned(&self) -> bool {
+        self.pinned
+    }
+
+    /// Returns the entry expiry time
+    #[must_use]
+    pub const fn get_entry_expires_at(&self) -> &Option<DateTime<Utc>> {
+        &self.expires_at
+    }
+
+    /// Returns the entry created at time
+    #[must_use]
+    pub const fn get_entry_created_at(&self) -> &DateTime<Utc> {
+        &self.created_at
+    }
 }
 
 #[cfg(test)]
@@ -162,5 +216,36 @@ mod tests {
             first.0 < second.0,
             "expected first ({first:?}) to sort before second ({second:?})"
         );
+    }
+
+    #[test]
+    fn check_clipentry_getter_functions() {
+        let id = EntryId::new();
+        let content = EntryContent::Text("Test".to_string());
+        let sensitivity = Sensitivity::Normal;
+        let mime_types = vec![MimeType("Mime".to_string())];
+        let times_pasted = PasteCount(3);
+        let pinned = true;
+        let created_at = DateTime::<Utc>::MIN_UTC;
+        let expires_at = None;
+        let entry: ClipEntry = ClipEntry {
+            id,
+            content: content.clone(),
+            sensitivity: sensitivity.clone(),
+            mime_types: mime_types.clone(),
+            times_pasted,
+            pinned,
+            created_at,
+            expires_at,
+        };
+
+        assert_eq!(id, *entry.get_entry_id());
+        assert_eq!(content, *entry.get_entry_content());
+        assert_eq!(sensitivity, *entry.get_entry_sensitivity());
+        assert_eq!(mime_types, *entry.get_entry_mime_types());
+        assert_eq!(times_pasted, *entry.get_entry_times_pasted());
+        assert_eq!(pinned, entry.get_entry_pinned());
+        assert_eq!(created_at, *entry.get_entry_created_at());
+        assert_eq!(expires_at, *entry.get_entry_expires_at());
     }
 }
