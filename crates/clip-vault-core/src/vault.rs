@@ -55,6 +55,10 @@ impl Vault {
     ///
     /// Returns [`Error::Crypto`] or [`Error::Storage`] if an error raised during the progress.
     pub(crate) fn create_with(store: Storage, password: &[u8]) -> crate::Result<Self> {
+        if store.load_vault()?.is_some() {
+            return Err(Error::VaultExist);
+        }
+
         let kdf = KdfParams::default();
         let mut salt = [0; 16];
         OsRng.fill_bytes(&mut salt);
@@ -192,6 +196,16 @@ mod tests {
             Sensitivity::Normal,
             vec!["text/plain".into()],
         )
+    }
+
+    #[test]
+    fn create_twice_rejected() {
+        let vault = Vault::create_with(Storage::in_memory().unwrap(), b"password").unwrap();
+
+        let store = vault.into_store(); // header persists in this store
+        let result = Vault::create_with(store, b"password");
+
+        assert!(matches!(result, Err(Error::VaultExist)));
     }
 
     #[test]
