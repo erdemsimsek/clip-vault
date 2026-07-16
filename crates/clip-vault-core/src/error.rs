@@ -12,6 +12,10 @@ pub enum Error {
     #[error("vault is locked")]
     VaultLocked,
 
+    /// Vault already exist
+    #[error("vault is already exist")]
+    VaultExist,
+
     /// Operation cancelled by user.
     #[error("operation aborted by the user")]
     OperationCancelled,
