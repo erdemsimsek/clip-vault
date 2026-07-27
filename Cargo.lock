@@ -236,6 +236,12 @@ version = "0.0.1"
 [[package]]
 name = "clip-vault-proto"
 version = "0.0.1"
+dependencies = [
+ "clip-vault-core",
+ "serde",
+ "serde_json",
+ "thiserror",
+]
 
 [[package]]
 name = "clip-vault-tui"
