@@ -3,6 +3,7 @@
 mod crypto;
 mod entry;
 mod error;
+mod scanner;
 mod storage;
 mod vault;
 
@@ -19,5 +20,7 @@ pub use crypto::{
 };
 
 pub use storage::{ContentKind, EntryMeta, Storage, StoredEntry};
+
+pub use scanner::{MimeHintScanner, PatternScanner, ScannerChain, SensitivityScanner};
 
 pub use vault::{Vault, VaultMeta};
