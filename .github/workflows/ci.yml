@@ -17,8 +17,12 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Code checkout
@@ -32,12 +36,17 @@ jobs:
         with:
           shared-key: "clip-vault-ci"
           cache-on-failure: true
+
       - name: Test
         run: cargo test --workspace
 
   doc:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Code checkout
@@ -56,8 +65,12 @@ jobs:
         run: cargo doc --workspace --no-deps --document-private-items
 
   clippy:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - name: Code checkout
@@ -105,7 +118,6 @@ jobs:
       - name: Security Audit
         run: cargo audit
 
-
   coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -123,8 +135,12 @@ jobs:
         run: cargo llvm-cov --workspace --lcov --output-path lcov.info
 
   msrv:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@1.95.0
