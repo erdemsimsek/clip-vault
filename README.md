@@ -1,6 +1,6 @@
 # ClipVault
 
-An encrypted clipboard manager for Wayland that doesn't keep your secrets forever.
+An encrypted clipboard manager for Linux (Wayland) and macOS that doesn't keep your secrets forever.
 
 > [!WARNING]
 > **Pre-alpha** — under active development, nothing usable yet.
@@ -17,7 +17,8 @@ ClipVault aims to fix that. The history is encrypted on disk. Anything that look
 
 - Encrypt the clipboard history on disk
 - Detect passwords, tokens and keys, and delete them after a short time
-- Work as a replacement for `cliphist` so existing Sway setups keep working
+- **Linux:** work as a drop-in replacement for `cliphist`, so existing Sway setups keep working
+- **macOS:** be an alternative to Maccy for people who want their history encrypted and their secrets gone automatically
 - Keep everything local — no telemetry, no cloud
 - Plan for syncing across devices later
 - Open source under MIT
@@ -25,7 +26,7 @@ ClipVault aims to fix that. The history is encrypted on disk. Anything that look
 ## Roadmap
 
 - [ ] **Milestone 1** — Core library, daemon, command-line tool
-- [ ] **Milestone 2** — Sway integration, systemd unit, deduplication
+- [ ] **Milestone 2** — Desktop integration (Sway and a systemd unit on Linux; pasteboard watcher and a launchd agent on macOS), deduplication
 - [ ] **Milestone 3** — Terminal UI picker with fuzzy search
 - [ ] **Milestone 4** — Image clipboard, AUR package, fish completions
 - [ ] **Phase 2** — Encrypted sync across devices

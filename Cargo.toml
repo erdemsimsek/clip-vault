@@ -11,7 +11,7 @@ resolver = "3"
 [workspace.package]
 version = "0.0.1"
 authors = ["Erdem Simsek"]
-description = "An encrypted clipboard manager for Wayland that doesn't keep your secrets forever."
+description = "An encrypted clipboard manager for Linux (Wayland) and macOS that doesn't keep your secrets forever."
 edition = "2024"
 readme = "README.md"
 license = "MIT"
